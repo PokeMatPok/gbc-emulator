@@ -1,4 +1,4 @@
-# 🎮 GBC Emulator
+# GBC Emulator
 
 A Game Boy Color (GBC/DMG) emulator written in **Rust**, compiled to **WebAssembly**, with a **WebGPU** (Canvas 2D fallback) web frontend.
 
