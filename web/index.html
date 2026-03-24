@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GBC Emulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🎮 Game Boy Color Emulator</h1>
+      <p id="cart-title">No ROM loaded</p>
+    </header>
+
+    <main>
+      <div id="screen-wrapper">
+        <canvas id="screen" width="160" height="144"></canvas>
+        <div id="screen-overlay" class="hidden">
+          <p>Drop a .gb / .gbc ROM here<br>or click to browse</p>
+          <input type="file" id="rom-input" accept=".gb,.gbc,.rom" />
+        </div>
+      </div>
+
+      <div id="controls">
+        <div id="dpad">
+          <button class="btn-dir" data-btn="up"    style="grid-area:up">▲</button>
+          <button class="btn-dir" data-btn="left"  style="grid-area:left">◀</button>
+          <button class="btn-dir" data-btn="down"  style="grid-area:down">▼</button>
+          <button class="btn-dir" data-btn="right" style="grid-area:right">▶</button>
+        </div>
+
+        <div id="action-buttons">
+          <button class="btn-action" data-btn="b">B</button>
+          <button class="btn-action" data-btn="a">A</button>
+        </div>
+
+        <div id="system-buttons">
+          <button class="btn-system" data-btn="select">SELECT</button>
+          <button class="btn-system" data-btn="start">START</button>
+        </div>
+      </div>
+
+      <div id="info-bar">
+        <span id="fps-counter">FPS: --</span>
+        <span id="mode-badge">--</span>
+        <button id="mute-btn" title="Mute/Unmute">🔊</button>
+        <button id="fullscreen-btn" title="Fullscreen">⛶</button>
+      </div>
+    </main>
+
+    <section id="drop-zone" class="hidden">
+      <p>Drop ROM file to load</p>
+    </section>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

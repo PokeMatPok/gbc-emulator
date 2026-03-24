@@ -1,0 +1,20 @@
+{
+  "name": "gbc-emulator",
+  "version": "0.1.0",
+  "description": "Game Boy Color emulator in Rust compiled to WebAssembly",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "wasm-pack build --target web --out-dir web/pkg && npm run copy-web",
+    "build:debug": "wasm-pack build --dev --target web --out-dir web/pkg && npm run copy-web",
+    "copy-web": "node scripts/copy-web.js",
+    "serve": "node scripts/server.js",
+    "dev": "npm run build:debug && npm run serve",
+    "test": "cargo test",
+    "clean": "rm -rf web/pkg target"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,232 @@
+/* ─── Reset & Variables ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1a2e;
+  --panel: #16213e;
+  --accent: #0f3460;
+  --highlight: #e94560;
+  --text: #eaeaea;
+  --text-dim: #888;
+  --radius: 12px;
+  --btn-bg: #0f3460;
+  --btn-active: #e94560;
+  --screen-border: #0f3460;
+  --dpad-size: 120px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── App Shell ─────────────────────────────────────────────────────────────── */
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+header {
+  text-align: center;
+}
+header h1 { font-size: 1.6rem; margin-bottom: 4px; }
+#cart-title {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+}
+
+/* ─── Screen ─────────────────────────────────────────────────────────────────── */
+#screen-wrapper {
+  position: relative;
+  border: 3px solid var(--screen-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(15, 52, 96, 0.8);
+}
+
+#screen {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  width: 320px;
+  height: 288px;
+  background: #000;
+}
+
+#screen-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text);
+  padding: 20px;
+  transition: opacity 0.2s;
+}
+#screen-overlay p { pointer-events: none; }
+#rom-input { display: none; }
+#screen-overlay:not(.hidden) { display: flex; }
+
+/* ─── Controls ─────────────────────────────────────────────────────────────── */
+#controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+}
+
+/* D-pad */
+#dpad {
+  display: grid;
+  grid-template-areas:
+    ".    up    ."
+    "left .     right"
+    ".    down  .";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: var(--dpad-size);
+  height: var(--dpad-size);
+  gap: 2px;
+}
+
+.btn-dir {
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.1s, transform 0.05s;
+  width: 36px;
+  height: 36px;
+  margin: auto;
+}
+.btn-dir:active, .btn-dir.pressed { background: var(--btn-active); transform: scale(0.92); }
+
+/* Action buttons */
+#action-buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-action {
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50%;
+  color: var(--text);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  width: 48px;
+  height: 48px;
+  transition: background 0.1s, transform 0.05s;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+.btn-action:active, .btn-action.pressed { background: var(--btn-active); transform: scale(0.92); }
+
+/* System buttons */
+#system-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-system {
+  background: #2a2a4a;
+  border: none;
+  border-radius: 20px;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 4px 10px;
+  transition: background 0.1s, transform 0.05s;
+}
+.btn-system:active, .btn-system.pressed { background: var(--btn-active); transform: scale(0.95); }
+
+/* ─── Info Bar ──────────────────────────────────────────────────────────────── */
+#info-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  width: 100%;
+  padding: 0 4px;
+}
+#fps-counter { min-width: 70px; }
+#mode-badge {
+  background: var(--accent);
+  color: var(--text);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
+#info-bar button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.1s;
+  margin-left: auto;
+}
+#info-bar button:hover { color: var(--text); }
+#mute-btn { margin-left: auto; }
+
+/* ─── Utilities ─────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ─── Drop Zone ─────────────────────────────────────────────────────────────── */
+#drop-zone {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 100;
+  pointer-events: none;
+}
+#drop-zone p {
+  background: var(--panel);
+  padding: 40px 60px;
+  border-radius: var(--radius);
+  border: 3px dashed var(--highlight);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  #screen { width: 240px; height: 216px; }
+  :root { --dpad-size: 100px; }
+  .btn-action { width: 40px; height: 40px; }
+}

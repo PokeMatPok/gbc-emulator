@@ -1,0 +1,5 @@
+/target
+/web/pkg
+node_modules
+*.swp
+.DS_Store
